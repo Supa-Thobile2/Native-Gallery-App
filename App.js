@@ -1,65 +1,26 @@
-import { StatusBar } from 'expo-status-bar';
-import React, {useEffect}from 'react';
-import { PermissionsAndroid, StyleSheet, Text, View } from 'react-native';
-import { SafeAreaView, ScrollView } from 'react-native';
-import { CameraRoll } from '@react-native-camera-roll/camera-roll';
+import React from 'react'
+import {Text} from "react-native"
+import AppHeader from "./components/appHeader"
+import {SafeAreaProvider} from "react-native-safe-area-context"
+import Gallery from "./components/gallery"
 
 
-// export default function App() {
-//   useEffect(()=>{
-//     const hasPermission = PermissionsAndroid.check(PermissionsAndroid.Permissions.READ_EXTERNAL_STORAGE)
-//   },[])
-//   return (
-//     <SafeAreaView>
-//       <ScrollView>
 
-//       </ScrollView>
-//     </SafeAreaView>
-  
-//   );
-// }
+function App(){
 
-const App = ()=>{
-
-    useEffect(()=>{
-     checkPermission()
-  },[])
-
-  const checkPermission = async()=>{
-    const hasPermission = PermissionsAndroid.check(PermissionsAndroid.Permissions.READ_EXTERNAL_STORAGE);
-    console.log(hasPermission)
-    if(hasPermission){
-     return true;
-    }
-
-    const status = await PermissionsAndroid.request(PermissionsAndroid.Permissions.READ_EXTERNAL_STORAGE,{
-     title: "Image Gallery app permissions",
-     message: "Image gallery needs your permission to access your photos",
-     buttonPositive: "Ok"
-    })
-    return status === "granted"
- }
+  return(
+<SafeAreaProvider>
 
 
-return (
-      <SafeAreaView>
-        <ScrollView>
-  
-        </ScrollView>
-      </SafeAreaView>
+        <AppHeader/>
+        <Gallery/>
+        
+
+
+</SafeAreaProvider>
     
-    );
-
-};
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
-
+    
+  )
+}
 
 export default App
